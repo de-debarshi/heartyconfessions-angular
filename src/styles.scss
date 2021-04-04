@@ -1,5 +1,25 @@
-/* You can add global styles to this file, and also import other style files */
-body {
-    background-color: black;
-    color: white;
+body{
+  background-color: #ffdde3 !important;
+}
+
+$tile-shadow-color: rgba(108,41,53,0.75);
+.confession-tiles {
+  padding: 30px;
+  margin-bottom: 50px;
+  border-radius: 10px;
+}
+.tile-shadow {
+  -webkit-box-shadow: 0px 0px 20px 5px $tile-shadow-color;
+  -moz-box-shadow: 0px 0px 20px 5px $tile-shadow-color;
+  box-shadow: 0px 0px 20px 5px $tile-shadow-color;
+  transition: box-shadow,transform .20s ease-out;
+}
+.tile-shadow:hover {
+  -webkit-box-shadow: 0px 0px 20px 10px $tile-shadow-color;
+  -moz-box-shadow: 0px 0px 20px 10px $tile-shadow-color;
+  box-shadow: 0px 0px 20px 10px $tile-shadow-color;
+  //transform: translateY(-1%);
+}
+.like-btn{
+  color: red;
 }

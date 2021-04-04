@@ -1,68 +1,31 @@
-
-<div class="confession-tiles" *ngFor="let confsn of confessionService.confessions | filterbystatus:'approved'" style="border: 1px solid;margin-bottom: 20px;">
-  <div><span style="padding: 5px;">Age: {{confsn.age}}</span><span style="padding: 5px;">Gender: {{confsn.sex}}</span></div>
-  <div style="border-top:1px solid; padding: 10px;">{{confsn.content}}</div>
-  <div><span style="padding: 5px;">{{confsn.likes}} people like this.</span></div>
-  <button (click)="liked(confsn)">Like</button>
-  <div class="comment-section">
-    <div class="comment-tile" *ngFor="let commentloop of confsn.comments">
-      <div>Commented by: {{commentloop.username}}</div>
-      <div>Commented on: {{commentloop.createdAt | date :'medium'}}</div>
-      <div>{{commentloop.comment}}</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 confession-tiles tile-shadow" *ngFor="let confsn of confessionService.confessions | filterbystatus:'approved'">
+        <div><span style="padding: 5px;">Age: {{confsn.age}}</span><span style="padding: 5px;">Gender: {{confsn.sex}}</span></div>
+        <div style="border-top:1px solid; padding: 10px;">{{confsn.content}}</div>
+        <div><span style="padding: 5px;">{{confsn.likes}} people like this.</span></div>
+        <i (click)="liked(confsn)" class="far fa-heart like-btn"></i>
+        <div class="comment-section" style="border-top:1px solid">
+          <div class="comment-tile" *ngFor="let commentloop of confsn.comments">
+            <div>Commented by: {{commentloop.username}}</div>
+            <div>Commented on: {{commentloop.createdAt | date :'medium'}}</div>
+            <div>{{commentloop.comment}}</div>
+          </div>
+          <form #commentForm="ngForm" (ngSubmit)="commentSubmit(commentForm)">
+            <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="confsn._id">
+            <div class="form-group">
+              <label for="username">Username:</label>
+              <input type="text" class="form-control" id="username" name="username" #name="ngModel" *ngIf="userDetails" [(ngModel)]="userDetails.fullName" required>
+            </div>
+            <div class="form-group" style="border-top:1px solid">
+              <label for="comment">Comment:</label>
+              <textarea class="form-control" name="comment" #name="ngModel" [(ngModel)]="confsn.comment" placeholder="Type your comment here..." rows="2"></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-primary" type="submit" [disabled]="!commentForm.valid">Submit</button>
+            </div>
+          </form>
+        </div>
     </div>
-    <form #commentForm="ngForm" (ngSubmit)="commentSubmit(commentForm)">
-      <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="confsn._id">
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" class="form-control" id="username" name="username" #name="ngModel" [(ngModel)]="confsn.username" required>
-      </div>
-      <div class="form-group">
-        <label for="comment">Comment:</label>
-        <textarea class="form-control" name="comment" #name="ngModel" [(ngModel)]="confsn.comment" placeholder="Type your comment here..." rows="2"></textarea>
-      </div>
-      <div class="col-12">
-        <button class="btn btn-primary" type="submit" [disabled]="!commentForm.valid">Submit</button>
-      </div>
-    </form>
   </div>
 </div>
-
-<!-- <div class="row">
-    <div class="col s12">
-      <div class="card">
-        <div class="card-content white-text">
-          <div class="row">
-            <div class="col s5">
-              
-            </div>
-            <div class="col s7">
-                <table class="responsive-table highlight">
-                    <thead>
-                      <tr>
-                        <th>Age</th>
-                        <th>Sex</th>
-                        <th>Content</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tr *ngFor="let confsn of confessionService.confessions">
-                      <td>{{confsn.age}}</td>
-                      <td>{{confsn.sex}}</td>
-                      <td>{{confsn.content}}</td>
-                      <td>
-                          <a class="action-btn" (click)="onEdit(confsn)">
-                            <i class="material-icons">edit</i>
-                          </a>
-                          <a class="action-btn" (click)="onDelete(confsn._id,confessionForm)">
-                            <i class="material-icons">delete</i>
-                          </a>
-                        </td>
-                    </tr>
-                  </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  
-  </div> -->

@@ -37,34 +37,3 @@
     <button class="btn btn-secondary float-right" type="button" (click)="resetForm(confessionForm)">Reset</button>
   </div>
 </form>
-
-
-<!-- <form #confessionForm="ngForm" (ngSubmit)="onSubmit(confessionForm)">
-    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="confessionService.selectedConfession._id">
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" name="age" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.age" placeholder="Enter age" required>
-        <label>Age :
-          <label class="red-text">*</label>
-        </label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" name="sex" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.sex" placeholder="male">
-        <label>Sex :</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <input type="text" name="content" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.content" placeholder="Content">
-        <label>Content :</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s12">
-        <button class="btn btn-custom right" type="button" (click)="resetForm(confessionForm)">Reset</button>
-        <button class="btn btn-custom right" type="submit" [disabled]="!confessionForm.valid">Submit</button>
-      </div>
-    </div>
-  </form> -->

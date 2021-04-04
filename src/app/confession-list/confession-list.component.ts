@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { ConfessionService } from '../shared/confession.service';
 import { Confession } from '../shared/confession.model';
-
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-confession-list',
@@ -12,11 +12,20 @@ import { Confession } from '../shared/confession.model';
   providers: [ConfessionService]
 })
 export class ConfessionListComponent implements OnInit {
-
-  constructor(public confessionService: ConfessionService) { }
+  userDetails;
+  constructor(public confessionService: ConfessionService, private userService: UserService) { }
   
   ngOnInit() {
     this.refreshConfessionList();
+    this.userService.getUserProfile().subscribe(
+      res => {
+        this.userDetails = res['user'];
+      },
+      err => { 
+        console.log(err);
+        
+      }
+    );
   }
 
   refreshConfessionList() {
