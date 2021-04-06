@@ -1,20 +1,94 @@
-<!--<app-confession-list></app-confession-list>-->
-<nav>
+<header>
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark lighten-1 header-color" [containerInside]="false">
+
+  <!-- Navbar brand -->
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Hearty Confessions</a></mdb-navbar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLinkActive="active" routerLink="/home" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLinkActive="active" routerLink="/submit" mdbWavesEffect>Confess</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLinkActive="active" routerLink="/login" mdbWavesEffect>Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link waves-light" routerLinkActive="active" routerLink="/signup" mdbWavesEffect>Sign Up</a>
+      </li>
+      <!-- Dropdown -->
+      <!-- <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          Basic dropdown<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+          <div class="divider dropdown-divider"></div>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+        </div>
+      </li> -->
+
+    </ul>
+    <!-- Links -->
+
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link">1 <mdb-icon fas icon="envelope"></mdb-icon></a>
+      </li>
+      <li class="nav-item avatar dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="" class="img-fluid rounded-circle z-depth-0" style="width:20px"></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/userprofile">My account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+        </div>
+      </li>
+    </ul>
+  </links>
+  <!-- Collapsible content -->
+
+</mdb-navbar>
+<!--/.Navbar-->
+<!-- <nav>
     <ul>
       <li><a routerLink="/home" routerLinkActive="active">Home</a></li>
       <li><a routerLink="/submit" routerLinkActive="active">Submit Your Confession</a></li>
       <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
       <li><a routerLink="/userprofile" routerLinkActive="active">Profile</a></li>
     </ul>
-</nav>
+</nav> -->
+<div class="header-brand">Hearty Confessions</div>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-2">
     </div>
     <div class="col-sm-8">
-      <router-outlet></router-outlet>
+      <div class="header-brand-subtext">~ because you are not alone</div>
     </div>
     <div class="col-sm-2">
     </div>
   </div>
 </div>
+</header>
+<main>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-2">
+      </div>
+      <div class="col-sm-8">
+        <router-outlet></router-outlet>
+      </div>
+      <div class="col-sm-2">
+      </div>
+    </div>
+  </div>
+</main>
+<footer></footer>

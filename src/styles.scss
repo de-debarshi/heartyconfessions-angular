@@ -1,12 +1,46 @@
+@import url('./app/shared/scrollbars.scss');
+@font-face {
+  font-family: Fresh Script;
+  src: url('./assets/freshscript.ttf');
+}
 body{
   background-color: #ffdde3 !important;
 }
-
+main {
+  margin: 50px 0;
+}
+.header-brand, .header-brand-subtext {
+  font-family: Fresh Script;
+  font-size: 100px;
+  text-align: center;
+}
+.header-brand-subtext {
+  font-family: Fresh Script;
+  text-align: right;
+  font-size: 40px;
+}
+.navbar-brand {
+  font-family: Fresh Script;
+  font-size: 50px;
+}
+.header-color.lighten-1 {
+  background-color: #e36379 !important;
+}
 $tile-shadow-color: rgba(108,41,53,0.75);
 .confession-tiles {
   padding: 30px;
   margin-bottom: 50px;
   border-radius: 10px;
+  background-color: white;
+}
+.comment-tile,.confession-content {
+  background-color: #ffedf1 !important;
+  border-radius: 10px;
+  margin: 0 0 5px 0;
+  padding: 10px;
+}
+.confession-reaction-wrapper {
+  margin: 10px 0;
 }
 .tile-shadow {
   -webkit-box-shadow: 0px 0px 20px 5px $tile-shadow-color;
@@ -22,4 +56,21 @@ $tile-shadow-color: rgba(108,41,53,0.75);
 }
 .like-btn{
   color: red;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-right: 5px;
+}
+.btn-primary {
+  background-color: #e36379 !important;
+  border-color: #e36379 !important;
+  border-radius: 20px;
+}
+.btn-primary:hover {
+  background-color: #f14360 !important;
+}
+.btn-primary:active {
+  background-color: #f82a4c !important;
+}
+.navbar-nav .nav-item>.nav-link.active {
+  background-color: hsla(0,0%,100%,.1);
 }

@@ -31,6 +31,9 @@ export class ConfessionService {
   putLike(emp: Confession) {
     return this.http.put(this.baseURL + `/liked&id=${emp._id}`, emp);
   }
+  unLike(emp: Confession) {
+    return this.http.put(this.baseURL + `/unliked&id=${emp._id}`, emp);
+  }
   postComment(form: NgForm) {
     return this.http.post(this.baseURL + `/comment`, form);
   }

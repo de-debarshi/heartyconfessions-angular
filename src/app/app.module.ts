@@ -15,6 +15,8 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 //routes
 //import { appRoutes } from './routes';
 import { UserService } from './shared/user.service';
@@ -37,7 +39,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

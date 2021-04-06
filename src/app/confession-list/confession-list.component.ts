@@ -13,6 +13,7 @@ import { UserService } from '../shared/user.service';
 })
 export class ConfessionListComponent implements OnInit {
   userDetails;
+  likedStatus: boolean = false;
   constructor(public confessionService: ConfessionService, private userService: UserService) { }
   
   ngOnInit() {
@@ -35,9 +36,16 @@ export class ConfessionListComponent implements OnInit {
   }
 
   liked(emp: Confession) {
+    this.likedStatus = !this.likedStatus;
+    if(this.likedStatus) {
       this.confessionService.putLike(emp).subscribe((res) => {
         this.refreshConfessionList();
       });
+    } else {
+      this.confessionService.unLike(emp).subscribe((res) => {
+        this.refreshConfessionList();
+      });
+    }
   }
 
   commentSubmit(form: NgForm) {
