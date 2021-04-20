@@ -11,7 +11,7 @@ export class ConfessionService {
 
   selectedConfession: Confession = new Confession;
   confessions: Confession[] = [];
-  readonly baseURL = 'http://localhost:3000/confession';
+  readonly baseURL = 'http://52.66.28.17:3000/confession';
   username: string;
   comment: string;
   
