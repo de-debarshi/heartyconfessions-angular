@@ -28,6 +28,7 @@ export class SignInComponent implements OnInit {
       res => {
         this.userService.setToken(res['token']);
         this.router.navigateByUrl('/userprofile');
+        location.reload();
       },
       err => {
         this.serverErrorMessages = err.error.message;

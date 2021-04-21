@@ -74,3 +74,13 @@ $tile-shadow-color: rgba(108,41,53,0.75);
 .navbar-nav .nav-item>.nav-link.active {
   background-color: hsla(0,0%,100%,.1);
 }
+.user-profile-table td{
+  border: 1px solid;
+  padding: 10px;
+  margin: 0 auto;
+  width: 300px;
+}
+.user-profile-table {
+  margin: 0 auto;
+  width: 300px;
+}

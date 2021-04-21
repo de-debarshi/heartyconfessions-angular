@@ -3,20 +3,23 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { environment } from '../../environments/environment';
 import { User } from './user.model';
+import { Router } from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   selectedUser: User = {
-    fullName: '',
+    _id: '',
+    userName: '',
     email: '',
-    password: ''
+    password: '',
+    userLikes: []
   };
 
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   //HttpMethods
 
@@ -31,8 +34,12 @@ export class UserService {
   getUserProfile() {
     return this.http.get(environment.apiBaseUrl + '/userProfile');
   }
-
-
+  saveUserLike(likeDetails: Object){
+    return this.http.post(environment.apiBaseUrl+'/saveUserLike',likeDetails,this.noAuthHeader);
+  }
+  deleteUserLike(likeDetails: Object){
+    return this.http.post(environment.apiBaseUrl+'/deleteUserLike',likeDetails,this.noAuthHeader);
+  }
   //Helper Methods
 
   setToken(token: string) {
@@ -63,5 +70,11 @@ export class UserService {
       return userPayload.exp > Date.now() / 1000;
     else
       return false;
+  }
+
+  onLogout(){
+    this.deleteToken();
+    this.router.navigate(['/login']);
+    location.reload();
   }
 }

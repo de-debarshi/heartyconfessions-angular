@@ -4,21 +4,19 @@
     <label for="age">Age:</label>
     <input type="number" class="form-control" id="age" name="age" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.age" required>
   </div>
-  <div class="form-group">
+  <!-- <div class="form-group">
     <label for="sex">Gender:</label>
     <input type="text" class="form-control" id="sex" name="sex" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.sex" required>
-  </div>
-  <!-- <div class="form-group">
-    <label for="exampleFormControlSelect1">Example select</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+  </div> -->
+  <div class="form-group">
+    <label for="sex">Gender:</label>
+    <select class="form-control" id="sex"  name="sex" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.sex" required>
+      <option>Female</option>
+      <option>Male</option>
+      <option>Other</option>
     </select>
   </div>
-  <div class="form-group">
+<!--   <div class="form-group">
     <label for="exampleFormControlSelect2">Example multiple select</label>
     <select multiple class="form-control" id="exampleFormControlSelect2">
       <option>1</option>

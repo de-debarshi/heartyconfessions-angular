@@ -3,7 +3,7 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark lighten-1 header-color" [containerInside]="false">
 
   <!-- Navbar brand -->
-  <mdb-navbar-brand><a class="navbar-brand" href="#">Hearty Confessions</a></mdb-navbar-brand>
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Confessions</a></mdb-navbar-brand>
 
   <!-- Collapsible content -->
   <links>
@@ -38,7 +38,7 @@
     </ul>
     <!-- Links -->
 
-    <ul class="navbar-nav ml-auto nav-flex-icons">
+    <ul class="navbar-nav ml-auto nav-flex-icons"  *ngIf="userDetails">
       <li class="nav-item">
         <a class="nav-link">1 <mdb-icon fas icon="envelope"></mdb-icon></a>
       </li>
@@ -47,7 +47,7 @@
           <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" alt="" class="img-fluid rounded-circle z-depth-0" style="width:20px"></a>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
           <a class="dropdown-item waves-light" mdbWavesEffect href="#" routerLink="/userprofile">My account</a>
-          <a class="dropdown-item waves-light" mdbWavesEffect href="#">Log out</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect href="#" (click)="userService.onLogout()">Log out</a>
         </div>
       </li>
     </ul>
@@ -64,9 +64,9 @@
       <li><a routerLink="/userprofile" routerLinkActive="active">Profile</a></li>
     </ul>
 </nav> -->
-<div class="header-brand">Hearty Confessions</div>
+<div class="header-brand">Confessions</div>
 
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="row">
     <div class="col-sm-2">
     </div>
@@ -76,7 +76,7 @@
     <div class="col-sm-2">
     </div>
   </div>
-</div>
+</div> -->
 </header>
 <main>
   <div class="container-fluid">

@@ -37,6 +37,7 @@ export class SubmitConfessionComponent implements OnInit {
   onSubmit(form: NgForm) {
     if (form.value._id == "") {
       this.confessionService.postConfession(form.value).subscribe((res) => {
+        location.reload();
         this.resetForm(form);
         this.refreshConfessionList();
       });

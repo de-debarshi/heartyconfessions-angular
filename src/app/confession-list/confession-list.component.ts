@@ -12,15 +12,18 @@ import { UserService } from '../shared/user.service';
   providers: [ConfessionService]
 })
 export class ConfessionListComponent implements OnInit {
-  userDetails;
-  likedStatus: boolean = false;
-  constructor(public confessionService: ConfessionService, private userService: UserService) { }
+  userDetails: any;
+  likedStatus: boolean;
+  constructor(public confessionService: ConfessionService, private userService: UserService ) {
+    //this.confessionService.likedStatus = true;
+  }
   
   ngOnInit() {
     this.refreshConfessionList();
     this.userService.getUserProfile().subscribe(
       res => {
         this.userDetails = res['user'];
+        console.log(this.userDetails);
       },
       err => { 
         console.log(err);
@@ -35,16 +38,35 @@ export class ConfessionListComponent implements OnInit {
     });
   }
 
-  liked(emp: Confession) {
-    this.likedStatus = !this.likedStatus;
-    if(this.likedStatus) {
-      this.confessionService.putLike(emp).subscribe((res) => {
-        this.refreshConfessionList();
-      });
+  liked(confession: Confession, userId: String) {
+    if(this.userDetails) {
+      var ids = { userid : userId , confessionid : confession._id};
+      if(this.userDetails.userLikes.indexOf(confession._id)>-1) {
+        this.likedStatus = true;
+      } else {
+        this.likedStatus = false;
+      }
+      console.log(this.userDetails.userLikes.indexOf(confession._id));
+      if(!this.likedStatus) {
+        this.confessionService.putLike(confession).subscribe((res) => {
+          //this.refreshConfessionList();
+        });
+        
+        this.userService.saveUserLike(ids).subscribe((res) => {
+          this.userDetails = res;
+          this.refreshConfessionList();
+        });
+      } else {
+        this.confessionService.unLike(confession).subscribe((res) => {
+          //this.refreshConfessionList();
+        });
+        this.userService.deleteUserLike(ids).subscribe((res) => {
+          this.userDetails = res;
+          this.refreshConfessionList();
+        });
+      }
     } else {
-      this.confessionService.unLike(emp).subscribe((res) => {
-        this.refreshConfessionList();
-      });
+      return false;
     }
   }
 

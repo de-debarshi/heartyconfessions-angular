@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 
 import { Confession } from './confession.model';
-
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,10 +11,10 @@ export class ConfessionService {
 
   selectedConfession: Confession = new Confession;
   confessions: Confession[] = [];
-  readonly baseURL = 'http://52.66.28.17:3000/confession';
+  readonly baseURL = environment.capiBaseUrl;
   username: string;
   comment: string;
-  
+  likedStatus: boolean;
   constructor(private http: HttpClient) { }
 
   postConfession(emp: Confession) {

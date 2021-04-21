@@ -22,9 +22,9 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  onLogout(){
+  /* onLogout(){
     this.userService.deleteToken();
     this.router.navigate(['/login']);
-  }
+  } */
 
 }
