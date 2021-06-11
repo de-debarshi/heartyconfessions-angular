@@ -4,6 +4,7 @@ export class Confession {
     sex: string;
     content: string;
     status: string;
+    categories: [string];
     likes: number;
     comments : [{
         username : string;

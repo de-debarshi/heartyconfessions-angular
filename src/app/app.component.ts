@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from './shared/user.service';
+import * as jquery from 'jquery';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,14 +10,17 @@ export class AppComponent {
   title = 'confessions-client';
   userDetails;
   constructor(private userService: UserService) { 
-    this.userService.getUserProfile().subscribe(
-      res => {
-        this.userDetails = res['user'];
-      },
-      err => { 
-        console.log(err);
-        
-      }
-    );
+    if(this.userService.isLoggedIn()) {
+      this.userService.getUserProfile().subscribe(
+        res => {
+          this.userDetails = res['user'];
+          console.log(this.userDetails);
+        },
+        err => { 
+          console.log(err);
+          
+        }
+      );
+    }
   }
 }

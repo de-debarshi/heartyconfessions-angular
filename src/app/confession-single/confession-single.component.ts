@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-
+import { ActivatedRoute } from '@angular/router';
 import { ConfessionService } from '../shared/confession.service';
 import { Confession } from '../shared/confession.model';
 import { UserService } from '../shared/user.service';
-declare var $ : any;
+import { NgForm } from '@angular/forms';
+
+
 @Component({
-  selector: 'app-confession-list',
-  templateUrl: './confession-list.component.html',
-  styleUrls: ['./confession-list.component.scss'],
-  providers: [ConfessionService]
+  selector: 'app-confession-single',
+  templateUrl: './confession-single.component.html',
+  styleUrls: ['./confession-single.component.scss']
 })
-export class ConfessionListComponent implements OnInit {
+export class ConfessionSingleComponent implements OnInit {
+  confessionID: String;
+  selectedConfession: Confession = new Confession;
   userDetails: any;
   likedStatus: boolean;
-  pageCounter: number = 1;
-  totalPages: number;
-  category: string;
-  constructor(public confessionService: ConfessionService, private userService: UserService ) {
-    //this.confessionService.likedStatus = true;
-  }
-  
+  constructor(private route: ActivatedRoute, public confessionService: ConfessionService, private userService: UserService) { }
+
   ngOnInit() {
-    this.refreshConfessionList();
+    this.route.queryParams.subscribe( params => {
+      this.confessionID = params['c'];
+    });
     if(this.userService.isLoggedIn()) {
       this.userService.getUserProfile().subscribe(
         res => {
@@ -35,32 +34,17 @@ export class ConfessionListComponent implements OnInit {
         }
       );
     }
-    $('.selectpicker').selectpicker();
+    this.refreshConfession();
   }
-
-  refreshConfessionList() {
-    this.confessionService.getConfessionList(this.pageCounter, this.category).subscribe((res) => {
-      this.confessionService.confessions = res['confessionList'] as Confession[];
-      this.totalPages = res['totalPage'];
+  refreshConfession() {
+    this.confessionService.getConfession(this.confessionID).subscribe((res) => {
+      this.selectedConfession = res as Confession;
     });
   }
-  nextPage() {
-    if(this.pageCounter < this.totalPages) {
-      this.pageCounter++;
-      this.refreshConfessionList();
-    }
-  }
-
-  prevPage() {
-    if(this.pageCounter > 0) {
-      this.pageCounter--;
-      this.refreshConfessionList();
-    }
-  }
-
-  liked(confession: Confession, userId: String) {
+  
+  liked(confession: Confession) {
     if(this.userDetails) {
-      var ids = { userid : userId , confessionid : confession._id};
+      var ids = { userid : this.userDetails._id , confessionid : confession._id};
       if(this.userDetails.userLikes.indexOf(confession._id)>-1) {
         this.likedStatus = true;
       } else {
@@ -69,20 +53,20 @@ export class ConfessionListComponent implements OnInit {
       console.log(this.userDetails.userLikes.indexOf(confession._id));
       if(!this.likedStatus) {
         this.confessionService.putLike(confession).subscribe((res) => {
-          //this.refreshConfessionList();
+          //this.refreshConfession();
         });
         
         this.userService.saveUserLike(ids).subscribe((res) => {
           this.userDetails = res;
-          this.refreshConfessionList();
+          this.refreshConfession();
         });
       } else {
         this.confessionService.unLike(confession).subscribe((res) => {
-          //this.refreshConfessionList();
+          //this.refreshConfession();
         });
         this.userService.deleteUserLike(ids).subscribe((res) => {
           this.userDetails = res;
-          this.refreshConfessionList();
+          this.refreshConfession();
         });
       }
     } else {
@@ -97,8 +81,9 @@ export class ConfessionListComponent implements OnInit {
     else {
       console.log(form.value);
       this.confessionService.postComment(form.value).subscribe((res) => {
-        this.refreshConfessionList();
+        this.refreshConfession();
       });
     }
   }
+
 }

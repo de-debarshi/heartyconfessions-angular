@@ -23,6 +23,7 @@ import { UserService } from './shared/user.service';
 //other
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { ConfessionSingleComponent } from './confession-single/confession-single.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     UserComponent,
     SignUpComponent,
     SignInComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ConfessionSingleComponent
   ],
   imports: [
     BrowserModule,

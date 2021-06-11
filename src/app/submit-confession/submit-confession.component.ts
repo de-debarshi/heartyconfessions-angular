@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { ConfessionService } from '../shared/confession.service';
 import { Confession } from '../shared/confession.model';
+declare var $ : any;
 
 @Component({
   selector: 'app-submit-confession',
@@ -17,7 +18,8 @@ export class SubmitConfessionComponent implements OnInit {
 
   ngOnInit() {
     this.resetForm();
-    this.refreshConfessionList();
+    //this.refreshConfessionList();
+    $('.selectpicker').selectpicker();
   }
 
   resetForm(form?: NgForm) {
@@ -29,6 +31,7 @@ export class SubmitConfessionComponent implements OnInit {
       sex: "",
       content: "",
       status: "",
+      categories: null,
       likes: null,
       comments : null
     }
@@ -38,23 +41,23 @@ export class SubmitConfessionComponent implements OnInit {
     if (form.value._id == "") {
       this.confessionService.postConfession(form.value).subscribe((res) => {
         location.reload();
-        this.resetForm(form);
-        this.refreshConfessionList();
+        //this.resetForm(form);
+        //this.refreshConfessionList();
       });
     }
     else {
       this.confessionService.putConfession(form.value).subscribe((res) => {
         this.resetForm(form);
-        this.refreshConfessionList();
+        //this.refreshConfessionList();
       });
     }
   }
 
-  refreshConfessionList() {
+  /* refreshConfessionList() {
     this.confessionService.getConfessionList().subscribe((res) => {
       this.confessionService.confessions = res as Confession[];
     });
-  }
+  } */
 
   onEdit(emp: Confession) {
     this.confessionService.selectedConfession = emp;
@@ -63,7 +66,7 @@ export class SubmitConfessionComponent implements OnInit {
   onDelete(_id: string, form: NgForm) {
     if (confirm('Are you sure to delete this record ?') == true) {
       this.confessionService.deleteConfession(_id).subscribe((res) => {
-        this.refreshConfessionList();
+        //this.refreshConfessionList();
         this.resetForm(form);
       });
     }

@@ -21,8 +21,12 @@ export class ConfessionService {
     return this.http.post(this.baseURL, emp);
   }
 
-  getConfessionList() {
-    return this.http.get(this.baseURL);
+  getConfessionList(pageNumber: Number, categories:String) {
+    return this.http.get(this.baseURL + `/paginate&page=${pageNumber}&category=${categories}`);
+  }
+
+  getConfession(id: String) {
+    return this.http.get(this.baseURL + `/single&id=${id}`);
   }
 
   putConfession(emp: Confession) {
