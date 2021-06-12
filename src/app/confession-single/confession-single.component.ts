@@ -4,7 +4,7 @@ import { ConfessionService } from '../shared/confession.service';
 import { Confession } from '../shared/confession.model';
 import { UserService } from '../shared/user.service';
 import { NgForm } from '@angular/forms';
-
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-confession-single',
@@ -16,12 +16,18 @@ export class ConfessionSingleComponent implements OnInit {
   selectedConfession: Confession = new Confession;
   userDetails: any;
   likedStatus: boolean;
+  shareData: object;
   constructor(private route: ActivatedRoute, public confessionService: ConfessionService, private userService: UserService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe( params => {
       this.confessionID = params['c'];
     });
+    this.shareData = {
+      title: 'Hearty Confession',
+      text: 'Check out this interesting confession!',
+      url: environment.capiBaseUrl + '?c=' + this.confessionID,
+    }
     if(this.userService.isLoggedIn()) {
       this.userService.getUserProfile().subscribe(
         res => {
@@ -85,5 +91,14 @@ export class ConfessionSingleComponent implements OnInit {
       });
     }
   }
-
+  
+  // Must be triggered some kind of "user activation"
+  shareConfession = async () => {
+    try {
+      await navigator.share(this.shareData);
+      //resultPara.textContent = 'MDN shared successfully'
+    } catch(err) {
+      //resultPara.textContent = 'Error: ' + err
+    }
+  }
 }
