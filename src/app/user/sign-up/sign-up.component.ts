@@ -39,6 +39,7 @@ export class SignUpComponent implements OnInit {
       _id: '',
       userName: '',
       email: '',
+      isVerified: false,
       password: '',
       userLikes: null
     };

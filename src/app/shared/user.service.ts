@@ -13,6 +13,7 @@ export class UserService {
     _id: '',
     userName: '',
     email: '',
+    isVerified: false,
     password: '',
     userLikes: []
   };
@@ -31,6 +32,18 @@ export class UserService {
     return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials,this.noAuthHeader);
   }
 
+  verify(token) {
+    return this.http.get(environment.apiBaseUrl + '/verify/' + token,this.noAuthHeader);
+  }
+  forgotPassword(email) {
+    return this.http.post(environment.apiBaseUrl + '/recover',{email: email}, this.noAuthHeader);
+  }
+  resetVerify(token) {
+    return this.http.post(environment.apiBaseUrl + '/resetverify', {token: token},this.noAuthHeader);
+  }
+  resetPassword(resetCredentials) {
+    return this.http.post(environment.apiBaseUrl + '/resetpassword', resetCredentials,this.noAuthHeader);
+  }
   getUserProfile() {
     return this.http.get(environment.apiBaseUrl + '/userProfile');
   }
@@ -69,12 +82,13 @@ export class UserService {
     if (userPayload)
       return userPayload.exp > Date.now() / 1000;
     else
+      this.deleteToken();
       return false;
   }
 
   onLogout(){
     this.deleteToken();
     this.router.navigate(['/login']);
-    location.reload();
+    //location.reload();
   }
 }

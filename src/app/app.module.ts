@@ -24,6 +24,8 @@ import { UserService } from './shared/user.service';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { ConfessionSingleComponent } from './confession-single/confession-single.component';
+import { VerifyEmailComponent } from './user/verify-email/verify-email.component';
+import { ResetPasswordComponent } from './user/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { ConfessionSingleComponent } from './confession-single/confession-single
     SignUpComponent,
     SignInComponent,
     UserProfileComponent,
-    ConfessionSingleComponent
+    ConfessionSingleComponent,
+    VerifyEmailComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

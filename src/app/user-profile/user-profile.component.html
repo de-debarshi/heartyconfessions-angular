@@ -18,6 +18,10 @@
             <td>{{userDetails.email}}</td>
         </tr>
         <tr>
+            <td>Verified?</td>
+            <td>{{userDetails.isVerified}}</td>
+        </tr>
+        <tr>
             <td colspan="2" class="text-center">
                 <button class="btn btn-primary" type="button" (click)="userService.onLogout()">Logout</button>
                 <!-- <input type="button"  value="Logout" /> -->

@@ -16,7 +16,7 @@ export class ConfessionListComponent implements OnInit {
   likedStatus: boolean;
   pageCounter: number = 1;
   totalPages: number;
-  category: string;
+  category: string = 'All';
   constructor(public confessionService: ConfessionService, private userService: UserService ) {
     //this.confessionService.likedStatus = true;
   }
