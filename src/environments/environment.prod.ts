@@ -1,5 +1,7 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://pubgmobileindia.info/api/auth',
-  capiBaseUrl: 'https://pubgmobileindia.info/api/confession'
+  apiBaseUrl: 'https://heartyconfessions.com/api/auth',
+  capiBaseUrl: 'https://heartyconfessions.com/api/confession',
+  WEBSITE_URL: 'https://www.heartyconfessions.com/',
+  API_URL: 'https://www.heartyconfessions.com/api'
 };

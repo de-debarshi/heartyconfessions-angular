@@ -21,37 +21,37 @@ export class UserService {
   noAuthHeader = { headers: new HttpHeaders({ 'NoAuth': 'True' }) };
 
   constructor(private http: HttpClient, private router: Router) { }
-
+  readonly baseURL = environment.API_URL + '/auth';
   //HttpMethods
 
   postUser(user: User){
-    return this.http.post(environment.apiBaseUrl+'/register',user,this.noAuthHeader);
+    return this.http.post(this.baseURL+'/register',user,this.noAuthHeader);
   }
 
   login(authCredentials) {
-    return this.http.post(environment.apiBaseUrl + '/authenticate', authCredentials,this.noAuthHeader);
+    return this.http.post(this.baseURL + '/authenticate', authCredentials,this.noAuthHeader);
   }
 
   verify(token) {
-    return this.http.get(environment.apiBaseUrl + '/verify/' + token,this.noAuthHeader);
+    return this.http.get(this.baseURL + '/verify/' + token,this.noAuthHeader);
   }
   forgotPassword(email) {
-    return this.http.post(environment.apiBaseUrl + '/recover',{email: email}, this.noAuthHeader);
+    return this.http.post(this.baseURL + '/recover',{email: email}, this.noAuthHeader);
   }
   resetVerify(token) {
-    return this.http.post(environment.apiBaseUrl + '/resetverify', {token: token},this.noAuthHeader);
+    return this.http.post(this.baseURL + '/resetverify', {token: token},this.noAuthHeader);
   }
   resetPassword(resetCredentials) {
-    return this.http.post(environment.apiBaseUrl + '/resetpassword', resetCredentials,this.noAuthHeader);
+    return this.http.post(this.baseURL + '/resetpassword', resetCredentials,this.noAuthHeader);
   }
   getUserProfile() {
-    return this.http.get(environment.apiBaseUrl + '/userProfile');
+    return this.http.get(this.baseURL + '/userProfile');
   }
   saveUserLike(likeDetails: Object){
-    return this.http.post(environment.apiBaseUrl+'/saveUserLike',likeDetails,this.noAuthHeader);
+    return this.http.post(this.baseURL+'/saveUserLike',likeDetails,this.noAuthHeader);
   }
   deleteUserLike(likeDetails: Object){
-    return this.http.post(environment.apiBaseUrl+'/deleteUserLike',likeDetails,this.noAuthHeader);
+    return this.http.post(this.baseURL+'/deleteUserLike',likeDetails,this.noAuthHeader);
   }
   //Helper Methods
 

@@ -26,7 +26,7 @@ export class ConfessionSingleComponent implements OnInit {
     this.shareData = {
       title: 'Hearty Confession',
       text: 'Check out this interesting confession!',
-      url: environment.capiBaseUrl + '?c=' + this.confessionID,
+      url: environment.WEBSITE_URL + '?c=' + this.confessionID,
     }
     if(this.userService.isLoggedIn()) {
       this.userService.getUserProfile().subscribe(

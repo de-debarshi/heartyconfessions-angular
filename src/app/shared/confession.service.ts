@@ -11,7 +11,7 @@ export class ConfessionService {
 
   selectedConfession: Confession = new Confession;
   confessions: Confession[] = [];
-  readonly baseURL = environment.capiBaseUrl;
+  readonly baseURL = environment.API_URL + '/confession';
   username: string;
   comment: string;
   likedStatus: boolean;
