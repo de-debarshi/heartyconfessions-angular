@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://localhost:3000/api',
-  capiBaseUrl: 'http://localhost:3000/confession'
+  WEBSITE_URL: 'http://localhost:3000/',
+  API_URL: 'http://localhost:3000/api'
 };
 
 /*

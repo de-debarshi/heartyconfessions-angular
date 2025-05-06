@@ -32,6 +32,22 @@ $tile-shadow-color: rgba(108,41,53,0.75);
   margin-bottom: 50px;
   border-radius: 10px;
   background-color: white;
+  &--small {
+    cursor: pointer;
+    .confession-content {
+      max-height: 200px;
+      min-height: 200px;
+      overflow: hidden;
+    }
+    .comment-section {
+      max-height: 100px;
+      min-height: 100px;
+      overflow: hidden;
+    }
+    .scrollbar, .force-overflow {
+        max-height: inherit;
+    }
+  }
 }
 .comment-tile,.confession-content {
   background-color: #ffedf1 !important;

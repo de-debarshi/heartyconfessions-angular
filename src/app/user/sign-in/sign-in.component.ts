@@ -28,12 +28,26 @@ export class SignInComponent implements OnInit {
       res => {
         this.userService.setToken(res['token']);
         this.router.navigateByUrl('/userprofile');
-        location.reload();
+        //location.reload();
       },
       err => {
         this.serverErrorMessages = err.error.message;
       }
     );
   }
-
+  forgotPassword() {
+    if(this.model.email) {
+      this.userService.forgotPassword(this.model.email).subscribe(
+        res => {
+          console.log(res);
+          this.serverErrorMessages = 'Check your Email!!';
+        },
+        err => {
+          this.serverErrorMessages = err.error.message;
+        }
+      );
+    } else {
+        this.serverErrorMessages = 'Enter Email ID';
+    }
+  }
 }

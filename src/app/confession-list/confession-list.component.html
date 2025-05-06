@@ -1,6 +1,17 @@
 <div class="container-fluid">
+  <div class="form-group">
+    <label for="categories">Confession Category:</label>
+    <select name="categories" id="categories" class="form-control selectpicker" (change)="refreshConfessionList()" #name="ngModel" [(ngModel)]="category">
+        <option>All</option>
+        <option>Random</option>
+        <option>Corporate</option>
+        <option>Romance</option>
+        <option>Funny</option>
+    </select>
+  </div>
   <div class="row">
-    <div class="col-sm-12 confession-tiles tile-shadow" *ngFor="let confsn of confessionService.confessions | filterbystatus:'approved'">
+    <div class="col-sm-4" [routerLink]="['/confession']" [queryParams]="{ c: confsn._id}" *ngFor="let confsn of confessionService.confessions | filterbystatus:'approved'">
+      <div class="confession-tiles confession-tiles--small tile-shadow">
         <div class="confession-content">
           <div style="font-size: 14px;"><i><span style="padding: 5px 5px 5px 0;"><b>Age</b>: {{confsn.age}}</span><span style="padding: 5px;"><b>Gender:</b> {{confsn.sex}}</span></i></div>
           <div>{{confsn.content}}</div>
@@ -17,7 +28,7 @@
             </div>
           </div>
           
-          <form #commentForm="ngForm" (ngSubmit)="commentSubmit(commentForm)" *ngIf="userDetails">
+          <!-- <form #commentForm="ngForm" (ngSubmit)="commentSubmit(commentForm)" *ngIf="userDetails">
             <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="confsn._id">
             <div class="form-group">
               <input type="hidden" class="form-control" id="username" name="username" #name="ngModel" *ngIf="userDetails" [(ngModel)]="userDetails.userName" required>
@@ -29,8 +40,11 @@
               <button class="btn btn-primary float-right" type="submit" [disabled]="!commentForm.valid">Comment</button>
             </div>
           </form>
-          <button class="btn btn-primary" type="button" *ngIf="!userDetails" routerLink="/login">Login to comment</button>
+          <button class="btn btn-primary" type="button" *ngIf="!userDetails" routerLink="/login">Login to comment</button> -->
         </div>
+      </div>
     </div>
   </div>
+  <button class="btn btn-primary float-left" type="button" *ngIf="pageCounter > 1" (click)="prevPage()">Previous Page</button>
+  <button class="btn btn-primary float-right" type="button" *ngIf="pageCounter < totalPages" (click)="nextPage()">Next Page</button>
 </div>

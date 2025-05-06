@@ -1,0 +1,37 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12 confession-tiles tile-shadow">
+          <div class="confession-content">
+            <div style="font-size: 14px;"><i><span style="padding: 5px 5px 5px 0;"><b>Age</b>: {{selectedConfession.age}}</span><span style="padding: 5px;"><b>Gender:</b> {{selectedConfession.sex}}</span></i></div>
+            <div>{{selectedConfession.content}}</div>
+          </div>
+          <div class="confession-reaction-wrapper"><span><i (click)="liked(selectedConfession)" class="fa-heart like-btn" [ngClass]="userDetails ? ( userDetails.userLikes.indexOf(selectedConfession._id)>-1 ? 'fas' : 'far' ) : 'far'"></i> {{selectedConfession.likes}} people like this.</span></div>
+          
+          <div class="comment-section">
+            <div class="scrollbar scrollbar-lady-lips thin">
+              <div class="force-overflow">
+                <div class="comment-tile" *ngFor="let commentloop of selectedConfession.comments">
+                  <div style="font-size: 14px;"><span style="font-weight: bold;">{{commentloop.username}}</span><i> commented on {{commentloop.createdAt | date :'medium'}}</i></div>
+                  <div>{{commentloop.comment}}</div>
+                </div>
+              </div>
+            </div>
+            
+            <form #commentForm="ngForm" (ngSubmit)="commentSubmit(commentForm)" *ngIf="userDetails">
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="selectedConfession._id">
+              <div class="form-group">
+                <input type="hidden" class="form-control" id="username" name="username" #name="ngModel" *ngIf="userDetails" [(ngModel)]="userDetails.userName" required>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control" name="comment" #name="ngModel" [(ngModel)]="selectedConfession.comment" placeholder="Type your comment here..." rows="2" required></textarea>
+              </div>
+              <div class="">
+                <button class="btn btn-primary float-right" type="submit" [disabled]="!commentForm.valid">Comment</button>
+              </div>
+            </form>
+            <button class="btn btn-primary" type="button" *ngIf="!userDetails" routerLink="/login">Login to comment</button>
+            <button class="btn btn-primary float-right" type="button" (click)="shareConfession()">Share</button>
+          </div>
+      </div>
+    </div>
+  </div>

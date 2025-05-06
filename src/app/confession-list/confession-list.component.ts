@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 import { ConfessionService } from '../shared/confession.service';
 import { Confession } from '../shared/confession.model';
 import { UserService } from '../shared/user.service';
-
+declare var $ : any;
 @Component({
   selector: 'app-confession-list',
   templateUrl: './confession-list.component.html',
@@ -14,28 +14,48 @@ import { UserService } from '../shared/user.service';
 export class ConfessionListComponent implements OnInit {
   userDetails: any;
   likedStatus: boolean;
+  pageCounter: number = 1;
+  totalPages: number;
+  category: string = 'All';
   constructor(public confessionService: ConfessionService, private userService: UserService ) {
     //this.confessionService.likedStatus = true;
   }
   
   ngOnInit() {
     this.refreshConfessionList();
-    this.userService.getUserProfile().subscribe(
-      res => {
-        this.userDetails = res['user'];
-        console.log(this.userDetails);
-      },
-      err => { 
-        console.log(err);
-        
-      }
-    );
+    if(this.userService.isLoggedIn()) {
+      this.userService.getUserProfile().subscribe(
+        res => {
+          this.userDetails = res['user'];
+          console.log(this.userDetails);
+        },
+        err => { 
+          console.log(err);
+          
+        }
+      );
+    }
+    $('.selectpicker').selectpicker();
   }
 
   refreshConfessionList() {
-    this.confessionService.getConfessionList().subscribe((res) => {
-      this.confessionService.confessions = res as Confession[];
+    this.confessionService.getConfessionList(this.pageCounter, this.category).subscribe((res) => {
+      this.confessionService.confessions = res['confessionList'] as Confession[];
+      this.totalPages = res['totalPage'];
     });
+  }
+  nextPage() {
+    if(this.pageCounter < this.totalPages) {
+      this.pageCounter++;
+      this.refreshConfessionList();
+    }
+  }
+
+  prevPage() {
+    if(this.pageCounter > 0) {
+      this.pageCounter--;
+      this.refreshConfessionList();
+    }
   }
 
   liked(confession: Confession, userId: String) {

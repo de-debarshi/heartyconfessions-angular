@@ -10,25 +10,25 @@
   </div> -->
   <div class="form-group">
     <label for="sex">Gender:</label>
-    <select class="form-control" id="sex"  name="sex" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.sex" required>
+    <select class="form-control selectpicker" id="sex"  name="sex" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.sex" required>
+      <option style="display: none;">Select</option>
       <option>Female</option>
       <option>Male</option>
       <option>Other</option>
     </select>
   </div>
-<!--   <div class="form-group">
-    <label for="exampleFormControlSelect2">Example multiple select</label>
-    <select multiple class="form-control" id="exampleFormControlSelect2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+  <div class="form-group">
+    <label for="categories">Confession Category:</label>
+    <select name="categories" id="categories" class="form-control selectpicker" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.categories" required multiple>
+        <option>Random</option>
+        <option>Corporate</option>
+        <option>Romance</option>
+        <option>Funny</option>
     </select>
-  </div> -->
+  </div>
   <div class="form-group">
     <label for="exampleFormControlTextarea1">Confession:</label>
-    <textarea class="form-control" name="content" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.content" placeholder="Type your confession here..." rows="5"></textarea>
+    <textarea class="form-control" name="content" #name="ngModel" [(ngModel)]="confessionService.selectedConfession.content" placeholder="Type your confession here..." rows="5" required></textarea>
   </div>
   <div class="col-12">
     <button class="btn btn-primary" type="submit" [disabled]="!confessionForm.valid">Submit</button>
