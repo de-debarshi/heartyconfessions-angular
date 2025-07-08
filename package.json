@@ -1,6 +1,7 @@
 {
   "name": "confessions-client",
   "version": "0.0.0",
+  "author": "Debarshi",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
